@@ -2,11 +2,11 @@
  
 # Fill in the information below
 # vCenter server address (FQDN or IP)
-$vcenter = "192.168.1.175"
+$vcenter = "vcenterhostname"
 # vCenter Username
-$user = "FOONET\Administrator"
+$user = "DOMAIN\Username"
 # Password
-$pass = "XXXX"
+$pass = "PASSWORD"
 
 # DO NOT TOUCH BELOW!!
  
