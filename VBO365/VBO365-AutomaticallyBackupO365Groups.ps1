@@ -22,7 +22,7 @@ $BackupJob = "X"
 
 # Get the Organization
 $Org = Get-VBOOrganization -Name $Organization
-# Leverage the Job which backs up the required sites
+# Leverage the Job which backs up the required Office 365 groups
 $Job = Get-VBOJob -Name $BackupJob
 # Get the Office 365 groups
 $Groups = Get-VBOOrganizationGroup -Organization $organization -Type Office365
