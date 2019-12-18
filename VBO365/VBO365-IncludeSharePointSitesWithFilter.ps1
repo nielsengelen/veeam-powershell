@@ -34,7 +34,6 @@ ForEach ($Site in $Sites) {
 
   # Only add the sites based on the filter
   if ($FilteredSite) {
-    Write-Host $Site.Name
     $newSite = New-VBOBackupItem -Site $Site
     Add-VBOBackupItem -Job $Job -BackupItem $newSite
   }
