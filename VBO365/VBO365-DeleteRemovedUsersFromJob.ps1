@@ -10,9 +10,11 @@
     http://www.github.com/nielsengelen
 #>
 
-Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
-
+# Modify the values below to your needs
 $JobName = "TEST"
+
+# Do not change below unless you know what you are doing
+Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
 
 $Job = Get-VBOJob -Name $JobName
 $JobSession = Get-VBOJobSession -Job $Job -Last

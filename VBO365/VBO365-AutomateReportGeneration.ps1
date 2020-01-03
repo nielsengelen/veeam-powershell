@@ -10,8 +10,6 @@
     http://www.github.com/nielsengelen
 #>
 
-Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
-
 # Modify the values below to your needs
 # Mail configuration
 $from = "vbo365@company.com"
@@ -30,7 +28,9 @@ $path = "c:\VBO365reports" # Folder to store reports
 $daysago = "30" # Amount of days to go back
 $format = "PDF" # Can be CSV or PDF
 
-## Do not change below unless you know what you are doing! ##
+# Do not change below unless you know what you are doing
+Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
+
 $endtime = Get-Date
 $starttime = (Get-Date).AddDays(-30)
 $pathtime = Get-Date -UFormat "%Y-%m-%d-%H%M%S" # 2019-06-18-125011 - YEAR-MONTH-DATE-HOURMINUTESSECONDS

@@ -12,13 +12,12 @@
     http://www.github.com/nielsengelen
 #>
 
-Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
-
 # Modify the values below to your needs
 $Organization = "X"
 $BackupJob = "X"
 
 # Do not change below unless you know what you are doing
+Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
 
 # Get the Organization
 $Org = Get-VBOOrganization -Name $Organization

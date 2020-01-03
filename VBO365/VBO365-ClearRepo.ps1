@@ -12,7 +12,7 @@
 
 Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
 
-$repo = Get-VBORepository -Name "NEWREPO"
+$repo = Get-VBORepository -Name "NEWREPO" # Change this to match your repository
 $usersList = Get-VBOEntityData -Type User -Repository $repo
 $groupsList = Get-VBOEntityData -Type Group -Repository $repo
 $sitesList = Get-VBOEntityData -Type Site -Repository $repo
