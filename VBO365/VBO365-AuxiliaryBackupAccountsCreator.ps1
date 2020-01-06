@@ -47,7 +47,7 @@ Import-Module -Name MSOnline
 
 # Connect to Office 365
 Write-Host "Provide your Office365 Admin Account Credentials" -BackgroundColor DarkGreen
-#Connect-MsolService -Credential $Credential
+Connect-MsolService -Credential $Credential
 
 Write-Host "Connecting to AzureAD..." -BackgroundColor DarkGreen
 Write-Host "Adding accounts..." -BackgroundColor DarkGreen
