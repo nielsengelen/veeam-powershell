@@ -104,6 +104,7 @@ function VBOinstall {
 	Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
 	
 	if ($json.license -and $json.license.src)  {
+		Write-Host "Installing license"
 	    $pathfile = Join-Path -Path $path -ChildPath $json.license.src
 	    Install-VBOLicense -Path $pathfile
 	}
