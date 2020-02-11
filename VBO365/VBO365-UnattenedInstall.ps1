@@ -37,7 +37,7 @@ $jsoninstall = '{
 		  ]
 	   },
 	   {  
-		  "src":"VeeamExplorerForExchange_4.0.0.2516.msi",
+		  "src":"VeeamExplorerForExchange_10.0.0.443.msi",
 		  "install":"__file__",
 		  "arguments":[  
 			 "/qn",
@@ -47,7 +47,7 @@ $jsoninstall = '{
 		  ]
 	   },
 	   {  
-		  "src":"VeeamExplorerForSharePoint_4.0.0.2516.msi",
+		  "src":"VeeamExplorerForSharePoint_10.0.0.443.msi",
 		  "install":"__file__",
 		  "arguments":[  
 			 "/qn",
