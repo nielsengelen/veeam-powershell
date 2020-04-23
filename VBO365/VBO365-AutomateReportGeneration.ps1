@@ -32,7 +32,7 @@ $format = "PDF" # Can be CSV or PDF
 Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.Archiver.PowerShell.psd1"
 
 $endtime = Get-Date
-$starttime = (Get-Date).AddDays(-30)
+$starttime = (Get-Date).AddDays(-$daysago)
 $pathtime = Get-Date -UFormat "%Y-%m-%d-%H%M%S" # 2019-06-18-125011 - YEAR-MONTH-DATE-HOURMINUTESSECONDS
 $fullpath = "$path\$pathtime"
 
