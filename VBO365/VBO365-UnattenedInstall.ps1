@@ -15,7 +15,7 @@
 #>
 
 # Download Veeam Backup for Microsoft Office 365
-$url = "https://download2.veeam.com/VeeamBackupOffice365_4.0.0.2516.zip"
+$url = "https://download2.veeam.com/VBO/v5/GA/VeeamBackupOffice365_5.0.1.179.zip"
 $output = "$PSScriptRoot\VBO365.zip"
 Invoke-WebRequest -Uri $url -OutFile $output
 
@@ -27,7 +27,7 @@ $jsoninstall = '{
    "license": { "src":"veeam_backup_microsoft_office.lic" },
    "steps": [
 		{  
-		  "src":"Veeam.Backup365_4.0.0.2516.msi",
+		  "src":"Veeam.Backup365_5.0.1.179.msi",
 		  "install":"__file__",
 		  "arguments":[  
 			 "/qn",
@@ -37,7 +37,7 @@ $jsoninstall = '{
 		  ]
 	   },
 	   {  
-		  "src":"VeeamExplorerForExchange_10.0.0.443.msi",
+		  "src":"VeeamExplorerForExchange.msi",
 		  "install":"__file__",
 		  "arguments":[  
 			 "/qn",
@@ -48,7 +48,17 @@ $jsoninstall = '{
 		  ]
 	   },
 	   {  
-		  "src":"VeeamExplorerForSharePoint_10.0.0.443.msi",
+		  "src":"VeeamExplorerForSharePoint.msi",
+		  "install":"__file__",
+		  "arguments":[  
+			 "/qn",
+			 "/log __log__",
+			 "ACCEPT_EULA=1",
+			 "ACCEPT_THIRDPARTY_LICENSES=1"
+		  ]
+	   },
+	   {  
+		  "src":"VeeamExplorerForTeams.msi",
 		  "install":"__file__",
 		  "arguments":[  
 			 "/qn",
