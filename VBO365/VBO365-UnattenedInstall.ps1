@@ -8,7 +8,7 @@
     
 	Create a folder C:\VBO365Install and place the script and license (optional) in there
 	
-    Created for Veeam Backup for Microsoft Office 365 v4b
+    Created for Veeam Backup for Microsoft Office 365 v5
     Released under the MIT license.
 .LINK
     http://www.github.com/nielsengelen
