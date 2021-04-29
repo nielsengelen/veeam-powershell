@@ -39,7 +39,7 @@ $OrganizationName = "yourdomain(.onmicrosoft).com"
 
 # Do not change below unless you know what you are doing
 if ((Get-InstalledModule -Name "AzureAD" -ErrorAction SilentlyContinue) -eq $null) {
-  Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Installing AzureAD module..." -BackgroundColor DarkGreen
+  Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Installing AzureAD module..." -BackgroundColor DarkGreen
   Install-Module -Name AzureAD
 }
 
@@ -47,21 +47,21 @@ Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.
 Import-Module -Name AzureAD
 
 # Connect to Office 365
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Connecting to AzureAD..." -BackgroundColor DarkGreen
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Provide your Microsoft 365 Admin Account credentials" -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Connecting to AzureAD..." -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Provide your Microsoft 365 Admin Account credentials" -BackgroundColor DarkGreen
 Connect-AzureAD
 
 # Checking for the security group if it exists or if we need to create it
 $secGroup = Get-AzureADGroup | Where { $_.DisplayName -eq $SecurityGroup }
 
 if (!$secGroup) {
-  Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Adding security group..." -BackgroundColor DarkGreen
+  Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Adding security group..." -BackgroundColor DarkGreen
   $secGroup = New-AzureADGroup -DisplayName $SecurityGroup -MailEnabled $False -MailNickName $SecurityGroup -SecurityEnabled $True -Description "Veeam Backup for Microsoft Office 365 Auxiliary Backup Accounts group" -ErrorAction SilentlyContinue
 } else {
-  Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Security group already exists..." -BackgroundColor DarkGray
+  Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Security group already exists..." -BackgroundColor DarkGray
 }
 
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Adding accounts..." -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Adding accounts..." -BackgroundColor DarkGreen
 
 [Int]$TotalAccounts = $StartFrom + $Accounts - 1
 $AccountsArray = @()
@@ -75,9 +75,9 @@ For ($i = $StartFrom; $i -le $TotalAccounts; $i++) {
   $CheckUser = Get-AzureADUser -SearchString $PrincipalName -ErrorAction SilentlyContinue
   
   if ($checkUser) {
-    Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Account $DisplayName$i already exists. Skipping..." -BackgroundColor DarkRed
+    Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Account $DisplayName$i already exists. Skipping..." -BackgroundColor DarkRed
    } else {
-    Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Adding account: $DisplayName$i" -BackgroundColor DarkGreen
+    Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Adding account: $DisplayName$i" -BackgroundColor DarkGreen
 
     $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
     $PasswordProfile.EnforceChangePasswordPolicy = $False
@@ -87,38 +87,38 @@ For ($i = $StartFrom; $i -le $TotalAccounts; $i++) {
     $newUser = New-AzureADUser -AccountEnabled $True -DisplayName $DisplayName$i -MailNickName $DisplayName$i -PasswordPolicies "DisablePasswordExpiration" -PasswordProfile $PasswordProfile -UserPrincipalName $PrincipalName -ErrorAction SilentlyContinue
     $AccountsArray += ,@($PrincipalName, $Password)
 
-    Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Adding account $DisplayName$i to security group $SecurityGroup." -BackgroundColor DarkGreen
+    Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Adding account $DisplayName$i to security group $SecurityGroup." -BackgroundColor DarkGreen
     Add-AzureADGroupMember -ObjectId $SecGroup.ObjectId -RefObjectId $newUser.ObjectId
   }
 }
 
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Sleeping for 30 seconds to prevent sync issues..." -BackgroundColor DarkGray
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Sleeping for 30 seconds to prevent sync issues..." -BackgroundColor DarkGray
 Start-Sleep -Seconds 30
 
 # Connect to Veeam Backup for Microsoft Office 365
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Connecting to Veeam Backup for Microsoft Office 365..." -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Connecting to Veeam Backup for Microsoft Office 365..." -BackgroundColor DarkGreen
 
 $Org = Get-VBOOrganization -Name $OrganizationName
 $Group = Get-VBOOrganizationGroup -Organization $Org -DisplayName $SecurityGroup
 $Members = Get-VBOOrganizationGroupMember -Group $Group
 $BackupAccounts = @()
 
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Configuring Backup Account for Veeam Backup for Microsoft Office 365..." -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Configuring Backup Account for Veeam Backup for Microsoft Office 365..." -BackgroundColor DarkGreen
 
 For ($j = 0; $j -lt $AccountsArray.Length; $j++) {
   ForEach ($Member in $Members) {
     if ($Member.Login -eq $AccountsArray[$j][0]) {
-      Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Setting password for Backup Account $Member." -BackgroundColor DarkGreen
+      Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Setting password for Backup Account $Member." -BackgroundColor DarkGreen
       $SecurePassword = ConvertTo-SecureString -String $AccountsArray[$j][1] -AsPlainText -Force
       $BackupAccounts += New-VBOBackupAccount -SecurityGroupMember $Member -Password $SecurePassword
     }
   }
 }
 
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Sleeping for 30 seconds to prevent sync issues..." -BackgroundColor DarkGray
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Sleeping for 30 seconds to prevent sync issues..." -BackgroundColor DarkGray
 Start-Sleep -Seconds 30
 
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Enabling Backup Accounts for Organization $OrganizationName..." -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "HH:mm:ss dd/MM/yyyy") "Enabling Backup Accounts for Organization $OrganizationName..." -BackgroundColor DarkGreen
 Set-VBOOrganization -Organization $Org -BackupAccounts $BackupAccounts | Out-Null
 
 # Wipe the Accounts array
