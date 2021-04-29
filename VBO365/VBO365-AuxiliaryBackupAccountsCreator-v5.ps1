@@ -47,9 +47,6 @@ Import-Module "C:\Program Files\Veeam\Backup365\Veeam.Archiver.PowerShell\Veeam.
 Import-Module -Name AzureAD
 
 # Connect to Office 365
-#Connect-MsolService -Credential $Credential
-#$Credential = Get-Credential 
-#Connect-AzureAD -Credential $Credential
 Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Connecting to AzureAD..." -BackgroundColor DarkGreen
 Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Provide your Office365 Admin Account credentials" -BackgroundColor DarkGreen
 Connect-AzureAD
