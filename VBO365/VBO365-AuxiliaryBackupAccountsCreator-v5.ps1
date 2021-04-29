@@ -48,7 +48,7 @@ Import-Module -Name AzureAD
 
 # Connect to Office 365
 Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Connecting to AzureAD..." -BackgroundColor DarkGreen
-Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Provide your Office365 Admin Account credentials" -BackgroundColor DarkGreen
+Write-Host (Get-Date -Format "hh:mm:ss dd/MM/yyyy") "Provide your Microsoft 365 Admin Account credentials" -BackgroundColor DarkGreen
 Connect-AzureAD
 
 # Checking for the security group if it exists or if we need to create it
