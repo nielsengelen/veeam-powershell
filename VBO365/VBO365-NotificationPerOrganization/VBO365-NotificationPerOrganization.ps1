@@ -15,8 +15,6 @@
     http://www.github.com/nielsengelen
 #>
 
-$adminEmail = "niels@foonet.be" # Configure if you set $adminReport to $True
-
 # Modify the values below to your needs
 # Mail server configuration
 $from = "vbo365@company.com"
